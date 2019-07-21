@@ -3,19 +3,18 @@
  */
 
 import { combineReducers } from 'redux';
-import appReducer from 'containers/App/reducer';
 import { connectRouter } from 'connected-react-router';
+
+// Reducers
+import appReducer from 'containers/App/reducer';
+import homePageReducer from 'containers/HomePage/reducer';
+
 import history from './history';
 
-/**
- * Merges the main reducer with the router state and dynamically injected reducers
- */
-export default function createReducer(injectedReducers = {}) {
-	const rootReducer = combineReducers({
-		app: appReducer,
-		router: connectRouter(history),
-		...injectedReducers,
-	});
+const rootReducers = combineReducers({
+	app: appReducer,
+	homePage: homePageReducer,
+	router: connectRouter(history),
+});
 
-	return rootReducer;
-}
+export default rootReducers;

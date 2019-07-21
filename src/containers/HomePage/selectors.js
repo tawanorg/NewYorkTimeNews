@@ -5,9 +5,9 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectDomain = state => state.app || initialState;
+const selectDomain = state => state.homePage || initialState;
 
-const makeSelectorApp = () =>
+const makeSelectorHomePage = () =>
   createSelector(
     selectDomain,
     state => state
@@ -15,5 +15,5 @@ const makeSelectorApp = () =>
 
 export { 
   selectDomain, 
-  makeSelectorApp
+  makeSelectorHomePage
 };

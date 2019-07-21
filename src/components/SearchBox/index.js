@@ -1,42 +1,37 @@
-import React from 'react';
+import React from "react";
 // import PropTypes from 'prop-types';
-import styled from 'styled-jss';
+import styled from "styled-jss";
 
-const Box = styled('div')({
-	backgroundColor: '#eee',
+const Box = styled("div")({
+	backgroundColor: "#eee",
 	borderRadius: 30,
 	border: 0,
 	flex: 1,
-	display: 'flex',
-	justifyContent: 'center',
-	overflow: 'hidden',
+	display: "flex",
+	justifyContent: "center",
+	overflow: "hidden"
 });
 
-const Input = styled('input')({
-	backgroundColor: '#eee',
+const Input = styled("input")({
+	backgroundColor: "#eee",
 	border: 0,
-	width: '100%',
+	width: "100%",
 	borderRadius: 30,
-	overflow: 'hidden',
-	padding: '0 20px',
-	outline: 'none',
-	fontSize: 16,
-	lineHeight: 1.6,
+	overflow: "hidden",
+	padding: "13px 20px",
+	outline: "none",
 });
 
-const SearchBox = () => {
+const SearchBox = ({ style }) => {
 	return (
-		<Box>
+		<Box style={style}>
 			<Input placeholder="Search for article..." />
 		</Box>
-	)
+	);
 };
 
-SearchBox.propTypes = {
-};
+SearchBox.propTypes = {};
 
-
-SearchBox.defaultProps = {
-};
+SearchBox.defaultProps = {};
 
 export default SearchBox;

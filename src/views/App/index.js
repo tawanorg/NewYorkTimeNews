@@ -2,20 +2,33 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+// components
 import Header from 'components/Header';
 
-class App extends Component {
-  render() {
-    console.log(this.props);
-    return (
-      <React.Fragment>
-        <Header />
-        <Switch>
-          <Route path="/" render={() => <div>Home</div>} />
-        </Switch>
-      </React.Fragment>
-    )
-  }
+// containers
+import HomePage from 'containers/HomePage';
+
+import tawanImage from 'images/avatar.jpeg';
+
+const mockUser = {
+  name: 'Tim Tawan',
+  photoUrl: tawanImage
+}
+
+function App() {
+  return (
+    <React.Fragment>
+      <Header
+        userName={mockUser.name}
+        userPhotoUrl={mockUser.photoUrl}
+      />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/detail/:id" render={() => <div>Detail</div>} />
+      </Switch>
+    </React.Fragment>
+  )
 }
 
 App.propTypes = {}

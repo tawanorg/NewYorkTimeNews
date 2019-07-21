@@ -123,6 +123,8 @@
   },
   "devDependencies": {
     "@deloitte-digital-au/eslint-config-react": "^3.4.0",
+    "astroturf": "^0.9.9",
+    "autoprefixer": "^9.6.1",
     "react-scripts": "^3.0.0",
     "sierra-library": "^3.5.0"
   }
