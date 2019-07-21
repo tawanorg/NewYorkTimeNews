@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import styled from "styled-jss";
 
 const Box = styled("div")({
-	borderBottom: "1px solid #eee",
 	display: "flex",
 	justifyContent: "flex-start",
 	overflow: "hidden",
@@ -12,9 +11,6 @@ const Box = styled("div")({
 	borderRadius: 3,
 	cursor: "pointer",
 	boxSizing: "border-box",
-	"&:hover": {
-		background: "#f1f1f1"
-	}
 });
 
 const Title = styled("h3")({
@@ -34,13 +30,13 @@ const SubTitle = styled("span")({
 	fontSize: 14
 });
 
-const truncate = (input, max = 255) =>
-	input.length > max ? `${input.substring(0, max)}...` : input;
+const truncate = (string, max = 255) =>
+	string && string.length > max ? `${string.substring(0, max)}...` : string;
 
 const Card = ({ style, title, subtitle }) => {
 	return (
 		<Box style={style}>
-			<Title>{truncate(title, 120)}</Title>
+			{title && <Title>{truncate(title, 120)}</Title>}
 			{subtitle && <SubTitle>{truncate(subtitle)}</SubTitle>}
 		</Box>
 	);

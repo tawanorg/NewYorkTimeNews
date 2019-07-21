@@ -8,7 +8,7 @@ import Header from 'components/Header';
 
 // containers
 import HomePage from 'containers/HomePage';
-
+import DetailPage from 'containers/DetailPage';
 import tawanImage from 'images/avatar.jpeg';
 
 const mockUser = {
@@ -25,7 +25,7 @@ function App() {
       />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/detail/:id" render={() => <div>Detail</div>} />
+        <Route exact path="/detail/:id" component={DetailPage} />
       </Switch>
     </React.Fragment>
   )
