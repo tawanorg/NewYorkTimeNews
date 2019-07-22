@@ -1,7 +1,20 @@
-const api_key = 'sassPb0INNF3zVoMfxMqLUBAvkncKn8N';
-const baseUri = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
-// https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=yourkey&sort=newest
-// with filters
-// fq=uri:(%22nyt://article/3c068727-3cd7-5b79-a8f7-a14f756132e0%22)
-// sort=oldest/newest
-// api-key=sassPb0INNF3zVoMfxMqLUBAvkncKn8N
+const api_key = "sassPb0INNF3zVoMfxMqLUBAvkncKn8N";
+const baseUri = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+
+const createBaseApiUrl = (params = {}) => {
+	if (typeof (params) !== 'object') {
+		throw new Error('params must be an object');
+	}
+
+    var buildParams = Object.assign({}, {
+		sort: "newest",
+		"api-key": api_key
+	}, params);
+
+	var encodeURI = encodeURIComponent;
+	return `${baseUri}?`+ Object.keys(buildParams)
+		.map(k => encodeURI(k) + "=" + encodeURI(buildParams[k]))
+		.join("&");
+};
+
+export default createBaseApiUrl;
