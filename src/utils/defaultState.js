@@ -1,11 +1,17 @@
-function ErrorMessage(status = 403, message = 'There is something wrong') {
-  this.status = status;
-  this.message = message;
+function DataEntry(entities, result) {
+  this.entities = entities || null;
+  this.result = result || null;
+}
+
+export function ErrorMessage(status, message) {
+  this.status = status || null;
+  this.message = message || null;
 }
 
 export default {
   isFetched: false,
   isFetching: false,
-  isFailed: new ErrorMessage,
-  records: [],
+  isError: false,
+  errorMessage: null,
+  data: new DataEntry,
 }

@@ -1,27 +1,28 @@
-import DetailPageView from 'views/DetailPage';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import DetailPageView from "views/DetailPage";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { createStructuredSelector } from "reselect";
 import {
-  makeSelectorDetailPage,
-} from './selectors';
-import * as detailPageAction from './actions';
+	makeSelectorDetailPage,
+	makeSelectorArticleContent
+} from "./selectors";
+import * as detailPageAction from "./actions";
 
 const mapStateToProps = createStructuredSelector({
-  detailPage: makeSelectorDetailPage(),
+	detailPage: makeSelectorDetailPage(),
+	article: makeSelectorArticleContent()
 });
- 
+
 export function mapDispatchToProps(dispatch) {
-  return {
-    request: () => dispatch(detailPageAction.appRequest()),
-  }
+	return {
+		getArticleContent: articleId =>
+			dispatch(detailPageAction.detailRequest(articleId))
+	};
 }
 
 const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
+	mapStateToProps,
+	mapDispatchToProps
 );
 
-export default compose(
-  withConnect,
-)(DetailPageView);
+export default compose(withConnect)(DetailPageView);

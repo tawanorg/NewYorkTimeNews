@@ -1,6 +1,6 @@
 import {
   REQUEST, 
-  UPDATED,
+  UPDATE,
   ERROR,
 } from './actionTypes';
 
@@ -9,7 +9,7 @@ export const appRequest = () => ({
 });
 
 export const appUpdate = user => ({
-  type: UPDATED,
+  type: UPDATE,
   payload: user,
 });
 

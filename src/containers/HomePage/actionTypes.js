@@ -1,1 +1,6 @@
 export const REQUEST = '@HOMEPAGE/REQUEST';
+export const UPDATE = '@HOMEPAGE/UPDATE';
+export const ERROR = '@HOMEPAGE/ERROR';
+
+export const SORTBY_REQUEST = '@HOMEPAGE/SORTBY_REQUEST';
+export const SORTBY_UPDATE = '@HOMEPAGE/SORTBY_UPDATE';

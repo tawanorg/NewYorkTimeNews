@@ -8,20 +8,30 @@ import { initialState } from './reducer';
 
 const selectDomain = state => state.app || initialState;
 
-const makeSelectorApp = () =>
+const makeSelectAppStatus = () =>
   createSelector(
     selectDomain,
-    state => state
+    ({
+      errorMessage,
+      isError,
+      isFetched,
+      isFetching,
+    }) => ({
+      errorMessage,
+      isError,
+      isFetched,
+      isFetching,
+    })
   );
 
 const makeSelectCurrentUserInfo = () => 
   createSelector(
-    makeSelectorApp(),
-    state => get(state, 'records.entities.currentUser.user', null)
+    selectDomain,
+    state => get(state, 'data.entities.currentUser.user', null)
   )
 
 export { 
   selectDomain, 
-  makeSelectorApp,
+  makeSelectAppStatus,
   makeSelectCurrentUserInfo
 };

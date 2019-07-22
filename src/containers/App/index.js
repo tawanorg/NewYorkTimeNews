@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import {
-  makeSelectorApp,
+  makeSelectAppStatus,
   makeSelectCurrentUserInfo,
 } from './selectors';
 import * as appActions from './actions';
 
 const mapStateToProps = createStructuredSelector({
-  app: makeSelectorApp(),
+  app: makeSelectAppStatus(),
   currentUser: makeSelectCurrentUserInfo(),
 });
  

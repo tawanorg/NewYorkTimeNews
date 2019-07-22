@@ -4,16 +4,21 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import {
   makeSelectorHomePage,
+  makeSelectorArticleList,
+  makeSelectorSortBy,
 } from './selectors';
 import * as homePageAction from './actions';
 
 const mapStateToProps = createStructuredSelector({
   homePage: makeSelectorHomePage(),
+  articles: makeSelectorArticleList(),
+  sortBy: makeSelectorSortBy(),
 });
  
 export function mapDispatchToProps(dispatch) {
   return {
-    request: () => dispatch(homePageAction.appRequest()),
+    getArticleList: () => dispatch(homePageAction.homeRequest()),
+    sortArticleList: (sortBy) => dispatch(homePageAction.sortByRequest(sortBy))
   }
 }
 

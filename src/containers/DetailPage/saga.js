@@ -1,15 +1,31 @@
-/**
- * Gets the repositories of the user from Github
- */
-
-import { call, put, all, takeLatest, delay } from 'redux-saga/effects';
-import request from 'utils/request';
+import { take, put, call, fork } from 'redux-saga/effects';
 import { REQUEST } from './actionTypes';
+import * as actions from './actions';
+import articleContentSchema from './schemas';
+import { normalize } from 'normalizr';
 
-export function* requestSaga() {
-  console.log('requestSaga');
+import articlesearchmockdata from 'mockdata/articlesearch_detail.json';
+
+export function* getArticleContent(articleId) {
+  try {
+    let { response } = articlesearchmockdata;
+    let data = normalize(response, articleContentSchema);
+    yield put(actions.detailUpdate(data));
+  } catch (error) {
+    yield put(actions.detailError(error));
+  }
+}
+
+export function* watchGetArticleContent() {
+  while (true) {
+    const task = yield take(REQUEST);
+    const articleId = task.payload;
+    if (task) {
+      yield call(getArticleContent, articleId)
+    }
+  }
 }
 
 export default function* root() {
-	yield takeLatest(REQUEST, requestSaga);
+	yield fork(watchGetArticleContent);
 }

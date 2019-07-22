@@ -1,24 +1,57 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Card from "components/Card";
-import StyledLink from './StyledLink';
-import ArticleBox from './ArticleBox';
-
+import StyledLink from "./StyledLink";
+import ArticleBox from "./ArticleBox";
 class HomePage extends React.Component {
+	componentDidMount() {
+		this.props.getArticleList();
+	}
+
+	handleToggleSortBy(sortBy) {
+		this.props.sortArticleList(sortBy);
+	}
+
 	render() {
-		console.log("HomePage", this.props);
+		console.log("HomePage", this.props, this.state);
+		let { sortBy } = this.props;
 		return (
-			<div style={{ padding: 15 }}>
-				<StyledLink to="/detail/1" title="test">
-					<ArticleBox>
-						<Card
-							title="The New York Times’s Paris theater critic sampled three productions on a visit to the Australian city."
-							subtitle="SYDNEY, Australia — Even when you know little about a country’s internal politics, aspects of it can seem eerily familiar. “How to Rule the World,” a new play by Nakkiah Lui for Sydney Theater Company, is deeply rooted in Australia’s cultural landscape: Jokes about the former prime minister, Julia Gillard, or the state of Tasmania may well escape visiting foreigners. Yet much else in this smart comedy resonates across borders."
-						/>
-					</ArticleBox>
-				</StyledLink>
-			</div>
+			<main style={{ padding: 15 }}>
+				<section>
+					<span>Sort by: </span>
+					<button onClick={() => this.handleToggleSortBy("newest")}>
+						Newest {sortBy === 'newest' && 'selected'}
+					</button>
+					<button onClick={() => this.handleToggleSortBy("oldest")}>
+						Oldest {sortBy === 'oldest' && 'selected'}
+					</button>
+				</section>
+				<section>{this.renderArticleList()}</section>
+			</main>
 		);
 	}
+
+	renderArticleList() {
+		let { articles } = this.props;
+
+		if (articles.length == 0) return <div />;
+
+		return articles.map(({ id, title, subTitle }, index) => (
+			<StyledLink to={`/detail/${id}`} title={title} key={`${id}-${index}}`}>
+				<ArticleBox>
+					<Card title={title} subtitle={subTitle} />
+				</ArticleBox>
+			</StyledLink>
+		));
+	}
 }
+
+HomePage.propTypes = {
+	articles: PropTypes.array
+};
+
+HomePage.defaultProps = {
+	articles: []
+};
 
 export default HomePage;

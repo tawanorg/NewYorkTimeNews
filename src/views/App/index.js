@@ -15,7 +15,13 @@ class App extends React.Component {
 		this.props.initialApp();
 	}
 
+	// static getDerivedStateFromProps(props, state) {
+	// 	console.log('getDerivedStateFromProps', props)
+	// 	return null;
+	// }
+
 	render() {
+		console.log('this.props', this.props)
 		let { currentUser } = this.props;
 		if (!currentUser) return null;
 

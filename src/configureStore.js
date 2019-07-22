@@ -7,14 +7,12 @@ import createSagaMiddleware from "redux-saga";
 import { routerMiddleware } from "connected-react-router";
 import rootReducers from "./reducers";
 import rootSagas from "./sagas";
-import { normalizrMiddleware } from "./middlewares";
 
 export default function configureStore(initialState = {}, history) {
 	const sagaMiddleware = createSagaMiddleware();
 	const middlewares = [
 		sagaMiddleware,
 		routerMiddleware(history),
-		normalizrMiddleware(),
 	];
 
 	const store = createStore(

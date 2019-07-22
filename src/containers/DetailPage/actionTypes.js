@@ -1,1 +1,3 @@
-export const REQUEST = '@HOMEPAGE/REQUEST';
+export const REQUEST = '@DETAILPAGE/REQUEST';
+export const UPDATE = '@DETAILPAGE/UPDATE';
+export const ERROR = '@DETAILPAGE/ERROR';

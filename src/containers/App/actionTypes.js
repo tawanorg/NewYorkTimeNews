@@ -1,3 +1,3 @@
 export const REQUEST = '@APP/REQUEST';
-export const UPDATED = '@APP/UPDATED';
+export const UPDATE = '@APP/UPDATE';
 export const ERROR = '@APP/ERROR';
