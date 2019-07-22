@@ -15,10 +15,10 @@ class App extends React.Component {
 		this.props.initialApp();
 	}
 
-	// static getDerivedStateFromProps(props, state) {
-	// 	console.log('getDerivedStateFromProps', props)
-	// 	return null;
-	// }
+	handleOnSearchInputChange(event) {
+		let keyword = event.target.value;
+		this.props.appSearchInputChange(keyword);
+	}
 
 	render() {
 		console.log('this.props', this.props)
@@ -29,7 +29,10 @@ class App extends React.Component {
 
 		return (
 			<React.Fragment>
-				<Header userName={name} userPhotoUrl={photoUrl} />
+				<Header
+					userName={name} userPhotoUrl={photoUrl}
+					onSearchInputChange={(event) => this.handleOnSearchInputChange(event)}
+				/>
 				<Switch>
 					<Route exact path="/" component={HomePage} />
 					<Route exact path="/detail/:id" component={DetailPage} />

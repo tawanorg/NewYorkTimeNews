@@ -1,5 +1,5 @@
 import React from "react";
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from "styled-jss";
 
 const Box = styled("div")({
@@ -19,19 +19,23 @@ const Input = styled("input")({
 	borderRadius: 30,
 	overflow: "hidden",
 	padding: "13px 20px",
-	outline: "none",
+	outline: "none"
 });
 
-const SearchBox = ({ style }) => {
+const SearchBox = ({ style, onChange }) => {
 	return (
 		<Box style={style}>
-			<Input placeholder="Search for article..." />
+			<Input placeholder="Search for article..." onChange={onChange} />
 		</Box>
 	);
 };
 
-SearchBox.propTypes = {};
+SearchBox.propTypes = {
+	onChange: PropTypes.func,
+};
 
-SearchBox.defaultProps = {};
+SearchBox.defaultProps = {
+	onChange: null,
+};
 
 export default SearchBox;

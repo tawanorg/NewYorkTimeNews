@@ -13,8 +13,20 @@ class HomePage extends React.Component {
 	}
 
 	render() {
-		console.log("HomePage", this.props, this.state);
-		let { sortBy } = this.props;
+		let { sortBy, homePage } = this.props;
+		let {
+			isFetched,
+			isFetching,
+		} = homePage;
+		
+		let isLoading = !isFetched && isFetching;
+
+		if (isLoading) {
+			return (
+				<div>isLoading...</div>
+			)
+		}
+
 		return (
 			<main style={{ padding: 15 }}>
 				<section>

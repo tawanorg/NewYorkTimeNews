@@ -1,7 +1,9 @@
 import defaultState from "utils/defaultState";
-import { REQUEST, UPDATE } from "./actionTypes";
+import { REQUEST, UPDATE, SEARCH_INPUT_CHANGE } from "./actionTypes";
 
-export const initialState = defaultState;
+export const initialState = Object.assign({}, defaultState, {
+	keyword: '',
+});
 
 /* eslint-disable default-case, no-param-reassign */
 export default (state = initialState, action) => {
@@ -17,6 +19,10 @@ export default (state = initialState, action) => {
 				isFetching: false,
 				data: action.payload
 			});
+		case SEARCH_INPUT_CHANGE:
+			return Object.assign({}, state, {
+				keyword: action.payload,
+			})
 		default:
 			return state;
 	}

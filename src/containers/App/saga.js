@@ -1,5 +1,5 @@
-import { take, put, call, fork } from 'redux-saga/effects';
-import { REQUEST } from './actionTypes';
+import { all, take, put, call, fork, throttle } from 'redux-saga/effects';
+import { REQUEST, SEARCH_INPUT_CHANGE } from './actionTypes';
 import * as actions from './actions';
 import tawanImage from 'images/avatar.jpeg';
 import appUserSchema from './schemas';
@@ -32,5 +32,7 @@ export function* watchGetCurrentUser() {
 }
 
 export default function* root() {
-	yield fork(watchGetCurrentUser);
+  yield all([
+    watchGetCurrentUser(),
+  ])
 }

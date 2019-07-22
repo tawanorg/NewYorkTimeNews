@@ -16,6 +16,7 @@ const mapStateToProps = createStructuredSelector({
 export function mapDispatchToProps(dispatch) {
   return {
     initialApp: () => dispatch(appActions.appRequest()),
+    appSearchInputChange: (input) => dispatch(appActions.appSearchInputChange(input))
   }
 }
 

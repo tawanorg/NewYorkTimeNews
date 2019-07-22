@@ -11,6 +11,20 @@ class DetailPage extends React.Component {
 	}
 
 	render() {
+		let { detailPage } = this.props;
+		let {
+			isFetched,
+			isFetching,
+		} = detailPage;
+		
+		let isLoading = !isFetched && isFetching;
+
+		if (isLoading) {
+			return (
+				<div>isLoading...</div>
+			)
+		}
+
 		return <div style={{ padding: 15 }}>{this.renderArticleContent()}</div>;
 	}
 

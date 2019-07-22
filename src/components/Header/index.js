@@ -20,10 +20,10 @@ const Wrapper = styled("div")({
 	alignItems: 'center',
 });
 
-const Header = ({ userName, userPhotoUrl }) => {
+const Header = ({ onSearchInputChange, userName, userPhotoUrl }) => {
 	return (
 		<Wrapper>
-			<SearchBox style={{ marginRight: 15 }} />
+			<SearchBox onChange={onSearchInputChange} style={{ marginRight: 15 }} />
 			<Avatar name={userName} photoUrl={userPhotoUrl} />
 		</Wrapper>
 	);
@@ -31,12 +31,14 @@ const Header = ({ userName, userPhotoUrl }) => {
 
 Header.propTypes = {
 	userName: PropTypes.string,
-	userPhotoUrl: PropTypes.string
+	userPhotoUrl: PropTypes.string,
+	onSearchInputChange: PropTypes.func,
 };
 
 Header.defaultProps = {
 	userName: null,
-	userPhotoUrl: null
+	userPhotoUrl: null,
+	onSearchInputChange: null
 };
 
 export default Header;
