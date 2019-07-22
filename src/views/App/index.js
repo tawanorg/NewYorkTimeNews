@@ -21,7 +21,6 @@ class App extends React.Component {
 	}
 
 	render() {
-		console.log('this.props', this.props)
 		let { currentUser } = this.props;
 		if (!currentUser) return null;
 

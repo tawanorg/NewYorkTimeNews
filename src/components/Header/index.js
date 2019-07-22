@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-jss";
 import Avatar from "../Avatar";
+import { Main } from '../Layouts';
 import SearchBox from "../SearchBox";
 
-const Wrapper = styled("div")({
-	minHeight: 50,
+const Box = styled("div")({
 	backgroundColor: props => props.theme.secondary,
 	borderTopWidth: 0,
 	borderBottomWidth: 1,
@@ -13,19 +13,26 @@ const Wrapper = styled("div")({
 	borderRightWidth: 0,
 	borderStyle: "solid",
 	borderColor: props => props.theme.borderColor,
+	padding: 10,
+});
+
+const Wrapper = styled("div")({
 	display: "flex",
 	flexDirection: "row",
 	justifyContent: "space-between",
-	padding: 10,
 	alignItems: 'center',
 });
 
 const Header = ({ onSearchInputChange, userName, userPhotoUrl }) => {
 	return (
-		<Wrapper>
-			<SearchBox onChange={onSearchInputChange} style={{ marginRight: 15 }} />
-			<Avatar name={userName} photoUrl={userPhotoUrl} />
-		</Wrapper>
+		<Box>
+			<Main>
+				<Wrapper>
+					<SearchBox onChange={onSearchInputChange} style={{ marginRight: 15 }} />
+					<Avatar name={userName} photoUrl={userPhotoUrl} />
+				</Wrapper>
+			</Main>
+		</Box>
 	);
 };
 

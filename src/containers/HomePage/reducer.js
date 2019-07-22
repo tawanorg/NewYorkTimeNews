@@ -1,5 +1,5 @@
 import defaultState from "utils/defaultState";
-import { REQUEST, UPDATE, SORTBY_UPDATE, SORTBY_REQUEST } from "./actionTypes";
+import { REQUEST, ERROR, UPDATE, SORTBY_UPDATE, SORTBY_REQUEST } from "./actionTypes";
 
 export const sortByDefault = "newest";
 export const initialState = Object.assign({}, defaultState, {
@@ -19,6 +19,11 @@ export default (state = initialState, action) => {
 				isFetched: true,
 				isFetching: false,
 				data: action.payload
+			});
+		case ERROR:
+			return Object.assign({}, initialState, {
+				isError: true,
+				errorMessage: action.payload.message,
 			});
 		case SORTBY_REQUEST:
 			return Object.assign({}, state, {

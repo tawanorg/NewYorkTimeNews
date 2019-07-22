@@ -15,15 +15,16 @@ function fetchArticleContent(params) {
 
 export function* getArticleContent(articleId) {
 	try {
-    let buildParams = {
-      fq: `_id:("nyt://article/${articleId}")`,
-    }
+		let buildParams = {
+			fq: `_id:("nyt://article/${articleId}")`,
+		}
 
-    let { response } = yield call(fetchArticleContent, buildParams);
+    	let { response } = yield call(fetchArticleContent, buildParams);
 		let data = normalize(response, articleContentSchema);
 		yield put(actions.detailUpdate(data));
 	} catch (error) {
-		yield put(actions.detailError(error));
+		console.error("ArticleContent: error", error);
+		yield put(actions.detailError(new Error('Something weng wrong!')));
 	}
 }
 

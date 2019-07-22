@@ -2,7 +2,7 @@
 const groundBlack = '#292929';
 const white = '#FFFFFF';
 
-const fontFamilyBase = `'Merriweather', serif`;
+const fontFamilyBase = `'Merriweather', Arial, serif`;
 
 const themes = {
     light: {

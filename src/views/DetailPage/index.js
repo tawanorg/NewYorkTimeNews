@@ -1,5 +1,13 @@
 import React from "react";
-import Card from "components/Card";
+import { Main, Section } from "components/Layouts";
+import Button from 'components/Button';
+import Tag from 'components/Tag';
+import shallowEqual from 'utils/shallowEqual';
+import { formatDate } from 'utils/helpers';
+import history from 'utils/history';
+import StyledColumn from './StyledColumn';
+import StyledRow from "./StyledRow";
+
 class DetailPage extends React.Component {
 	componentDidMount() {
 		let {
@@ -10,22 +18,62 @@ class DetailPage extends React.Component {
 		this.props.getArticleContent(id);
 	}
 
+	shouldComponentUpdate(nextProps, nextState) {
+		if (!shallowEqual(nextProps.article, this.props.article)) {
+			return true;
+		}
+
+		if (!shallowEqual(nextProps.detailPage, this.props.detailPage)) {
+			return true;
+		}
+
+		if (!shallowEqual(nextProps.match, this.props.match)) {
+			return true;
+		}
+
+		return false;
+	}
+
 	render() {
 		let { detailPage } = this.props;
 		let {
 			isFetched,
 			isFetching,
+			isError,
 		} = detailPage;
 		
 		let isLoading = !isFetched && isFetching;
 
-		if (isLoading) {
+		if (isError) {
 			return (
-				<div>isLoading...</div>
+				<Main>
+					<Section>
+						<h1>Oops!. Something went wrong!</h1>
+					</Section>
+				</Main>
 			)
 		}
 
-		return <div style={{ padding: 15 }}>{this.renderArticleContent()}</div>;
+		if (isLoading) {
+			return (
+				<Main>
+					<Section>
+						<h1>Loading..</h1>
+					</Section>
+				</Main>
+			)
+		}
+
+		return (
+			<Main>
+				<Section>
+					<Button onClick={() => history.goBack()}>
+						Back
+					</Button>
+				</Section>
+				{this.renderArticleContent()}
+			</Main>
+		)
 	}
 
 	renderArticleContent() {
@@ -46,17 +94,21 @@ class DetailPage extends React.Component {
 
 		return (
 			<article>
-				<h1>{title}</h1>
-				<div>
-					<span>{author}</span>
-					<span>{publishedDate}</span>
-				</div>
-				<span>{types}</span>
-				<span>{subTitle}</span>
-				<span>{source}</span>
-				<a href={webUrl} title={title} target="_blank">
-					Read more
-				</a>
+				<StyledColumn>
+					<h1>{title}</h1>
+					<StyledRow>
+						<Tag style={{ marginRight: 5, marginBottom: 5 }}>{author}</Tag>
+						<Tag style={{ marginRight: 5, marginBottom: 5 }}>{formatDate(publishedDate)}</Tag>
+						<Tag style={{ marginRight: 5, marginBottom: 5 }}>{types}</Tag>
+						<Tag style={{ marginRight: 5, marginBottom: 5 }}>{source}</Tag>
+					</StyledRow>
+					<p>{subTitle}</p>
+				</StyledColumn>
+				<StyledColumn>
+					<Button onClick={() => window.location = webUrl}>
+						Read more
+					</Button>
+				</StyledColumn>
 			</article>
 		);
 	}

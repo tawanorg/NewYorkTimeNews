@@ -1,5 +1,5 @@
 import defaultState from "utils/defaultState";
-import { REQUEST, UPDATE } from "./actionTypes";
+import { REQUEST, UPDATE, ERROR } from "./actionTypes";
 
 export const initialState = defaultState;
 
@@ -16,6 +16,11 @@ export default (state = initialState, action) => {
 				isFetched: true,
 				isFetching: false,
 				data: action.payload
+			});
+		case ERROR:
+			return Object.assign({}, initialState, {
+				isError: true,
+				errorMessage: action.payload.message,
 			});
 		default:
 			return state;

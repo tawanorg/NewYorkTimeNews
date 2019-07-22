@@ -10,7 +10,7 @@ import appReducer from 'containers/App/reducer';
 import homePageReducer from 'containers/HomePage/reducer';
 import detailPageReducer from 'containers/DetailPage/reducer';
 
-import history from './history';
+import history from './utils/history';
 
 const rootReducers = combineReducers({
 	app: appReducer,
