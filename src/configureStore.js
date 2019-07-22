@@ -13,8 +13,8 @@ export default function configureStore(initialState = {}, history) {
 	const sagaMiddleware = createSagaMiddleware();
 	const middlewares = [
 		sagaMiddleware,
+		routerMiddleware(history),
 		normalizrMiddleware(),
-		routerMiddleware(history)
 	];
 
 	const store = createStore(

@@ -1,9 +1,19 @@
 import {
-  REQUEST,
+  REQUEST, 
+  UPDATED,
+  ERROR,
 } from './actionTypes';
-import schemas from './schemas';
 
 export const appRequest = () => ({
   type: REQUEST,
-  schema: schemas,
+});
+
+export const appUpdate = user => ({
+  type: UPDATED,
+  payload: user,
+});
+
+export const appError = error => ({
+  type: ERROR,
+  payload: error,
 });

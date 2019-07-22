@@ -9,12 +9,9 @@ import { normalize, schema } from 'normalizr';
 // });
 
 // // Define your article
-// const article = new schema.Entity('articles', {
-//   author: user,
-//   comments: [comment]
-// });
+const user = new schema.Entity('user', {});
 
 export default data => normalize(data, {
-  // article,
+  user,
 });
  
