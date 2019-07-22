@@ -1,17 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import Card from "components/Card";
 import Button from "components/Button";
 import { Main, Section } from "components/Layouts";
+import ErrorBox from "components/ErrorBox";
+import LoadingBox from "components/LoadingBox";
+
 import shallowEqual from "utils/shallowEqual";
+
 import StyledLink from "./StyledLink";
 import ArticleBox from "./ArticleBox";
-import HeroSection from './HeroSection';
+import HeroSection from "./HeroSection";
 
 class HomePage extends React.Component {
 	state = {
-		shouldShowHeroSection: true,
-	}
+		shouldShowHeroSection: true
+	};
 
 	componentDidMount() {
 		this.props.getArticleList();
@@ -31,7 +36,12 @@ class HomePage extends React.Component {
 			return true;
 		}
 
-		if (!shallowEqual(nextState.shouldShowHeroSection, this.state.shouldShowHeroSection)) {
+		if (
+			!shallowEqual(
+				nextState.shouldShowHeroSection,
+				this.state.shouldShowHeroSection
+			)
+		) {
 			return true;
 		}
 
@@ -44,19 +54,24 @@ class HomePage extends React.Component {
 	}
 
 	handleCloseHero() {
-		this.setState({
-			shouldShowHeroSection: false,
-		}, () => {
-			localStorage.setItem('shouldShowHeroSection', JSON.stringify(0));
-		})
+		this.setState(
+			{
+				shouldShowHeroSection: false
+			},
+			() => {
+				localStorage.setItem("shouldShowHeroSection", JSON.stringify(0));
+			}
+		);
 	}
 
 	async getHeroSection() {
-		let shouldShowHeroSection = await localStorage.getItem('shouldShowHeroSection');
+		let shouldShowHeroSection = await localStorage.getItem(
+			"shouldShowHeroSection"
+		);
 		if (shouldShowHeroSection === "0") {
 			this.setState({
-				shouldShowHeroSection: false,
-			})
+				shouldShowHeroSection: false
+			});
 		}
 	}
 
@@ -68,41 +83,28 @@ class HomePage extends React.Component {
 		let isLoading = !isFetched && isFetching;
 
 		if (isError) {
-			return (
-				<Main>
-					<Section>
-						<h1>Oops!. Something went wrong!</h1>
-					</Section>
-				</Main>
-			);
+			return <ErrorBox />;
 		}
 
 		if (isLoading) {
-			return (
-				<Main>
-					<Section>
-						<h1>Loading..</h1>
-					</Section>
-				</Main>
-			);
+			return <LoadingBox />;
 		}
 
 		return (
 			<Main>
-				{
-					shouldShowHeroSection && (
-						<HeroSection>
-							<h1>Hi, there!</h1>
-							<p>
-								It's Tawan, thank you for the opportunity to get to know you'll. This is my test
-								application for 7Peaks Software. I kinda rush to finish the test, I
-								am on the move. I definitely could do better on real project. Please
-								feel free to provide ANY feedback, do not hesitate to contact me tim@tawan.me
-							</p>
-							<Button onClick={() => this.handleCloseHero()}>Close</Button>
-						</HeroSection>
-					)
-				}
+				{shouldShowHeroSection && (
+					<HeroSection>
+						<h1>Hi, there!</h1>
+						<p>
+							It's Tawan, thank you for the opportunity to get to know you'll.
+							This is my test application for 7Peaks Software. I kinda rush to
+							finish the test, I am on the move. I definitely could do better on
+							real project. Please feel free to provide ANY feedback, do not
+							hesitate to contact me tim@tawan.me
+						</p>
+						<Button onClick={() => this.handleCloseHero()}>Close</Button>
+					</HeroSection>
+				)}
 				<Section>
 					<Button
 						kind={sortBy === "newest" ? "primary" : "default"}

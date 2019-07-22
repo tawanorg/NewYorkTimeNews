@@ -1,12 +1,8 @@
-/* eslint-disable */
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 
-// components
 import Header from "components/Header";
-
-// containers
 import HomePage from "containers/HomePage";
 import DetailPage from "containers/DetailPage";
 

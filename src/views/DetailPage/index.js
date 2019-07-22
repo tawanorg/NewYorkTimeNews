@@ -1,11 +1,16 @@
 import React from "react";
+
 import { Main, Section } from "components/Layouts";
-import Button from 'components/Button';
-import Tag from 'components/Tag';
-import shallowEqual from 'utils/shallowEqual';
-import { formatDate } from 'utils/helpers';
-import history from 'utils/history';
-import StyledColumn from './StyledColumn';
+import Button from "components/Button";
+import Tag from "components/Tag";
+import ErrorBox from "components/ErrorBox";
+import LoadingBox from "components/LoadingBox";
+
+import shallowEqual from "utils/shallowEqual";
+import { formatDate } from "utils/helpers";
+import history from "utils/history";
+
+import StyledColumn from "./StyledColumn";
 import StyledRow from "./StyledRow";
 
 class DetailPage extends React.Component {
@@ -36,44 +41,26 @@ class DetailPage extends React.Component {
 
 	render() {
 		let { detailPage } = this.props;
-		let {
-			isFetched,
-			isFetching,
-			isError,
-		} = detailPage;
-		
+		let { isFetched, isFetching, isError } = detailPage;
+
 		let isLoading = !isFetched && isFetching;
 
 		if (isError) {
-			return (
-				<Main>
-					<Section>
-						<h1>Oops!. Something went wrong!</h1>
-					</Section>
-				</Main>
-			)
+			return <ErrorBox />;
 		}
 
 		if (isLoading) {
-			return (
-				<Main>
-					<Section>
-						<h1>Loading..</h1>
-					</Section>
-				</Main>
-			)
+			return <LoadingBox />;
 		}
 
 		return (
 			<Main>
 				<Section>
-					<Button onClick={() => history.goBack()}>
-						Back
-					</Button>
+					<Button onClick={() => history.goBack()}>Back</Button>
 				</Section>
 				{this.renderArticleContent()}
 			</Main>
-		)
+		);
 	}
 
 	renderArticleContent() {
@@ -98,16 +85,16 @@ class DetailPage extends React.Component {
 					<h1>{title}</h1>
 					<StyledRow>
 						<Tag style={{ marginRight: 5, marginBottom: 5 }}>{author}</Tag>
-						<Tag style={{ marginRight: 5, marginBottom: 5 }}>{formatDate(publishedDate)}</Tag>
+						<Tag style={{ marginRight: 5, marginBottom: 5 }}>
+							{formatDate(publishedDate)}
+						</Tag>
 						<Tag style={{ marginRight: 5, marginBottom: 5 }}>{types}</Tag>
 						<Tag style={{ marginRight: 5, marginBottom: 5 }}>{source}</Tag>
 					</StyledRow>
 					<p>{subTitle}</p>
 				</StyledColumn>
 				<StyledColumn>
-					<Button onClick={() => window.location = webUrl}>
-						Read more
-					</Button>
+					<Button onClick={() => (window.location = webUrl)}>Read more</Button>
 				</StyledColumn>
 			</article>
 		);
